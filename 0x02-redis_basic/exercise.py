@@ -7,6 +7,17 @@ Cache class for redis database
 import redis
 import uuid as v4
 from typing import Union, Callable
+import functools
+
+
+def count_calls(method: Callable) -> Callable:
+	""" Decorator to count calls to Cache methods"""
+	@functools.wraps(method)
+	def wrapper(self, *args, **kwargs):
+		key = f"{method.__qualname__}"
+		self._redis.incr(key)
+		return method(self, *args, **kwargs)
+	return wrapper
 
 class Cache:
 	""" Cache class created"""
@@ -14,6 +25,7 @@ class Cache:
 		self._redis = redis.Redis()
 		self._redis.flushdb()
 
+	@count_calls
 	def store(self, data: Union[str, bytes, int, float]) -> str:
 		"""
 		Stores the passed in data using uuid as keys
