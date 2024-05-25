@@ -6,6 +6,7 @@ Cache class for redis database
 
 import redis
 import uuid as v4
+from typing import Union
 
 class Cache:
 	""" Cache class created"""
@@ -13,7 +14,7 @@ class Cache:
 		self._redis = redis.Redis()
 		self._redis.flushdb()
 
-	def store(self, data) -> str:
+	def store(self, data: Union[str, bytes, int, float]) -> str:
 		"""
 		Stores the passed in data using uuid as keys
 		"""
