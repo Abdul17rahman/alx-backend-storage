@@ -13,10 +13,10 @@ class Cache:
 		self._redis = redis.Redis()
 		self._redis.flushdb()
 
-	def store(self, data):
+	def store(self, data) -> str:
 		"""
 		Stores the passed in data using uuid as keys
 		"""
-		key = str(v4.uuid4())
+		key: str = str(v4.uuid4())
 		self._redis.set(key, data)
 		return key
