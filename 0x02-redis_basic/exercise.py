@@ -31,10 +31,10 @@ class Cache:
 
 		return val
 	
-	def get_str(self, key:str) -> str:
+	def get_str(self, key: str) -> str:
 		""" Parametirize Cache.get for a string val"""
 		return self.get(key, lambda X: X.decode('utf-8'))
 
-	def get_int(self, key:int) -> int:
+	def get_int(self, key: str) -> int:
 		""" Paraterize Cache.get for int val"""
 		return self.get(key, int)
