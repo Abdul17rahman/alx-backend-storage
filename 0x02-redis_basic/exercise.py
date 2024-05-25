@@ -22,7 +22,7 @@ class Cache:
 		self._redis.set(key, data)
 		return key
 
-	def get(self, key: str,  fn: Callable[[bytes], None]):
+	def get(self, key: str,  fn: Callable[[bytes], None]) -> Union[str, bytes, int, float]:
 		""" retrieves a val from db"""
 		val = self._redis.get(key)
 
