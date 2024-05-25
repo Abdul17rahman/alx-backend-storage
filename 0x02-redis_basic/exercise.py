@@ -14,7 +14,7 @@ def count_calls(method: Callable) -> Callable:
 	""" Decorator to count calls to Cache methods"""
 	@functools.wraps(method)
 	def wrapper(self, *args, **kwargs):
-		key = f"{method.__qualname__}"
+		key = method.__qualname__
 		self._redis.incr(key)
 		return method(self, *args, **kwargs)
 	return wrapper
