@@ -8,9 +8,10 @@ import redis
 import uuid as v4
 
 class Cache:
+	""" Cache class created"""
 	def __init__(self):
 		self._redis = redis.Redis()
-		self._redis.flushall()
+		self._redis.flushdb()
 
 	def store(self, data):
 		"""
