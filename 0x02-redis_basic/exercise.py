@@ -61,7 +61,9 @@ class Cache:
 		self._redis.set(key, data)
 		return key
 
-	def get(self, key: str,  fn: Union[Callable, None] = None) -> Union[str, bytes, int, float]:
+	def get(
+			self, key: str,  fn: Union[Callable, None] = None
+			) -> Union[str, bytes, int, float]:
 		""" retrieves a val from db"""
 		val = self._redis.get(key)
 
@@ -69,7 +71,7 @@ class Cache:
 			return fn(val)
 
 		return val
-	
+
 	def get_str(self, key: str) -> str:
 		""" Parametirize Cache.get for a string val"""
 		return self.get(key, lambda x: x.decode('utf-8') if x else None)
